@@ -17,14 +17,14 @@
         "jsx": "react-jsx",
         // "allowImportingTsExtensions": true,
         "baseUrl": "src",
-        "paths": {
-            "@api/*": ["api/*"],
-            "@components/*": ["components/*"],
-            "@hooks/*": ["hooks/*"],
-            "@pages/*": ["pages/*"],
-            "@types/*": ["types/*"],
-            "@utils/*": ["utils/*"]
-        }
+        // "paths": {
+        //     "@api/*": ["api/*"],
+        //     "@components/*": ["components/*"],
+        //     "@hooks/*": ["hooks/*"],
+        //     "@pages/*": ["pages/*"],
+        //     "@types/*": ["types/*"],
+        //     "@utils/*": ["utils/*"]
+        // }
     },
     "include": ["src", "./**/*.ts", "./**/*.tsx"],
     "exclude": ["node_modules"]

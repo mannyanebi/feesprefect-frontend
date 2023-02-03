@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Home from './pages';
+import Home from 'pages';
 // import Home from './pages/index.tsx';
 
 // import reportWebVitals from './reportWebVitals';
