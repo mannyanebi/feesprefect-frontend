@@ -4,15 +4,7 @@ module.exports = {
         node: true,
         jest: true,
     },
-    extends: [
-        'eslint:recommended',
-        'airbnb',
-        'prettier',
-        'prettier/react',
-        'prettier/@typescript-eslint',
-        'plugin:prettier/recommended',
-        'plugin:jest/recommended',
-    ],
+    extends: ['eslint:recommended', 'airbnb', 'prettier', 'plugin:prettier/recommended', 'plugin:jest/recommended'],
     parser: '@typescript-eslint/parser',
     plugins: ['@typescript-eslint'],
     parserOptions: {
@@ -33,7 +25,7 @@ module.exports = {
         },
     },
     rules: {
-        indent: ['error', 2],
+        indent: ['error', 4],
         'linebreak-style': ['error', 'unix'],
         quotes: ['error', 'single'],
         'no-console': 'warn',
