@@ -14,12 +14,26 @@ module.exports = {
             jsx: true,
         },
     },
+    overrides: [
+        {
+            files: ['src/pages/**/*.tsx', 'src/api/*.ts', 'src/api/**/*.ts'],
+            rules: {
+                'import/no-unresolved': 'off',
+                'react/jsx-props-no-spreading': 'off',
+                'react/function-component-definition': 'off',
+                'react/require-default-props': 'off',
+                'no-undef': 'off',
+                'arrow-body-style': 'off',
+            },
+        },
+    ],
     settings: {
         react: {
             version: 'detect',
         },
         'import/resolver': {
             node: {
+                paths: ['src'],
                 extensions: ['.js', '.jsx', '.ts', '.tsx'],
             },
         },
@@ -31,7 +45,16 @@ module.exports = {
         'no-console': 'warn',
         'no-unused-vars': 'off',
         '@typescript-eslint/no-unused-vars': ['error', { vars: 'all', args: 'after-used', ignoreRestSiblings: false }],
-        '@typescript-eslint/explicit-function-return-type': 'warn', // Consider using explicit annotations for object literals and function return types even when they can be inferred.
+        // '@typescript-eslint/explicit-function-return-type': 'warn', // Consider using explicit annotations for object literals and function return types even when they can be inferred.
         'no-empty': 'warn',
+        'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', 'ts', 'tsx'] }],
+        'import/no-unresolved': [2, { caseSensitive: false }],
+        'import/extensions': [
+            1,
+            {
+                // eslint-disable-next-line no-bitwise
+                tsx: 'never',
+            },
+        ],
     },
 };
