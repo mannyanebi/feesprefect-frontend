@@ -1,0 +1,17 @@
+public/
+styles/
+test-fixtures/
+node_modules/
+.next/
+**/*.css
+package.json
+package-lock.json
+yarn.lock
+tsconfig.json
+.eslintrc.json
+.prettierrc
+README.md
+.github/*
+CHANGELOG.md
+.vscode/launch.json
+.vscode/settings.json

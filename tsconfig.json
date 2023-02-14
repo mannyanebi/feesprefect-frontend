@@ -14,7 +14,18 @@
         "resolveJsonModule": true,
         "isolatedModules": true,
         "noEmit": true,
-        "jsx": "react-jsx"
+        "jsx": "react-jsx",
+        // "allowImportingTsExtensions": true,
+        "baseUrl": "src",
+        // "paths": {
+        //     "@api/*": ["api/*"],
+        //     "@components/*": ["components/*"],
+        //     "@hooks/*": ["hooks/*"],
+        //     "@pages/*": ["pages/*"],
+        //     "@types/*": ["types/*"],
+        //     "@utils/*": ["utils/*"]
+        // }
     },
-    "include": ["src"]
+    "include": ["src", "./**/*.ts", "./**/*.tsx"],
+    "exclude": ["node_modules"]
 }
