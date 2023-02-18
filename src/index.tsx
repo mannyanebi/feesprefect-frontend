@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Home from 'pages';
-// import Home from './pages/index.tsx';
+import App from 'App';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // import reportWebVitals from './reportWebVitals';
 
@@ -10,7 +11,18 @@ import Home from 'pages';
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
     <React.StrictMode>
-        <Home />
+        <App />
+        <ToastContainer
+            position="top-right"
+            autoClose={2500}
+            hideProgressBar
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+        />
     </React.StrictMode>,
 );
 
