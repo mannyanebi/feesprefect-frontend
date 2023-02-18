@@ -1,8 +1,13 @@
 import React from 'react';
 import DFPNLogo from 'images/svg/DFNPLogo.svg';
+import { Link } from 'react-router-dom';
 
 function FeesprefectLogo() {
-    return <img src={DFPNLogo} className="w-[2rem] md:w-[3rem]" alt="Feesprefect Logo" />;
+    return (
+        <Link to="/">
+            <img src={DFPNLogo} className="w-[2rem] md:w-[3rem]" alt="Feesprefect Logo" />
+        </Link>
+    );
 }
 
 export default FeesprefectLogo;
