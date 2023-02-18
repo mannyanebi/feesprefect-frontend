@@ -15,7 +15,7 @@ function HomepageContent() {
                 </p>
                 <button
                     type="button"
-                    className="bg-black text-white p-2 mx-auto rounded-md w-[6rem] text-base md:text-xl"
+                    className="bg-black text-white p-2 mx-auto md:mx-0 rounded-md w-[6rem] text-base md:text-xl"
                 >
                     Begin
                 </button>
