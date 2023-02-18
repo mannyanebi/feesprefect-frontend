@@ -3,7 +3,7 @@ import React from 'react';
 
 function NavBar() {
     return (
-        <div className="flex flex-row justify-between">
+        <div className="flex flex-row items-center justify-between">
             <FeesprefectLogo />
             <div className="flex flex-row space-x-4">
                 <button
