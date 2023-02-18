@@ -19,7 +19,6 @@ function LoginForm() {
     // const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
     const onSubmit: SubmitHandler<ILoginFormFieldTypes> = async (data) => {
-        console.log(errors);
         try {
             const response = await api.post('auth/login/', {
                 username: data.Username,
