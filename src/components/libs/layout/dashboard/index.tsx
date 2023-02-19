@@ -1,17 +1,14 @@
 import DashboardTopNavigation from 'components/molecules/m-dashboard-top-navigation';
 import Sidebar from 'components/organisms/o-dashboard-sidebar';
 import React from 'react';
-
-interface IDashboardLayoutProps {
-    children: React.ReactNode;
-}
+import { Outlet } from 'react-router-dom';
 
 // interface IToggleOpenSidebarProps {
 //     openSidebar: boolean
 //     toggleOpenSidebar: () => void
 // }
 
-function DashboardLayout({ children }: IDashboardLayoutProps) {
+function DashboardLayout() {
     // const { width }: Size = useWindowSize();
     // const [openSidebar, toggleOpenSidebar]: [boolean, () => void] = useToggle();
     // const [shiftDashboardContent, toggleShiftDashboardContent] = useToggle();
@@ -25,7 +22,9 @@ function DashboardLayout({ children }: IDashboardLayoutProps) {
             <div className="dashboard-content">
                 <div className="flex-flex-column p-2 space-y-2">
                     <DashboardTopNavigation />
-                    <div>{children}</div>
+                    <div>
+                        <Outlet />
+                    </div>
                 </div>
             </div>
         </>
