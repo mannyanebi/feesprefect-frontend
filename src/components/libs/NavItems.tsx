@@ -1,11 +1,15 @@
 import { v4 as uuidv4 } from 'uuid';
+import { BsCreditCardFill } from 'react-icons/bs';
+import { HiAcademicCap } from 'react-icons/hi';
+import { SiGoogleclassroom } from 'react-icons/si';
 import DashboardIcon from 'components/libs/icons/Dashboard';
+import { IconType } from 'react-icons/lib';
 
 interface Item {
     id: string;
     name: string;
     path: string;
-    Icon: typeof DashboardIcon;
+    Icon: typeof DashboardIcon | IconType;
 }
 
 const NavItems: Item[] = [
@@ -17,21 +21,21 @@ const NavItems: Item[] = [
     },
     {
         id: uuidv4(),
-        name: 'Events',
-        path: '/events',
-        Icon: DashboardIcon,
+        name: 'Classes',
+        path: '/dashboard/classes',
+        Icon: SiGoogleclassroom,
     },
     {
         id: uuidv4(),
-        name: 'Membership',
-        path: '/membership',
-        Icon: DashboardIcon,
+        name: 'Students',
+        path: '/dashboard/students',
+        Icon: HiAcademicCap,
     },
     {
         id: uuidv4(),
-        name: 'Trainings',
-        path: '/trainings',
-        Icon: DashboardIcon,
+        name: 'Payments',
+        path: '/dashboard/payments',
+        Icon: BsCreditCardFill,
     },
 ];
 

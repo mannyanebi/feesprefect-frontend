@@ -2,6 +2,7 @@ import { useLocation } from 'react-router-dom';
 import React from 'react';
 import SidebarNavItem from 'components/atoms/a-sidebar-item';
 import NavItems from 'components/libs/NavItems';
+import FeesprefectLogo from 'components/atoms/a-feesprefect-logo';
 
 const style = {
     active: 'bg-primary rounded-full text-white',
@@ -20,8 +21,9 @@ function Sidebar() {
             <div id="logo-content">
                 <div id="logo" className="text-slate-600 flex h-[3.125rem] w-full items-center">
                     {/* <img src={Avatar.src} alt="" width="28px" height="28px" className="mr-2" /> */}
-                    <div id="logo-name" className="text-xl">
-                        Peddlesoft
+                    <div id="logo-name" className="flex flex-row space-x-4 text-xl items-center justify-center">
+                        <FeesprefectLogo />
+                        <span>Feesprefect</span>
                     </div>
                 </div>
                 {/* <MenuIcon className="absolute left-[90%] top-[1.2rem] translate-x-[-50%] items-center" /> */}

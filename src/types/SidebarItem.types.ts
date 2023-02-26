@@ -1,6 +1,7 @@
 /* eslint-disable import/no-unresolved */
 
 import DashboardIcon from 'components/libs/icons/Dashboard';
+import { IconType } from 'react-icons';
 
 // interface defaultProps{
 //     className: string
@@ -18,5 +19,5 @@ export interface SidebarNavItemProps {
         icon_active: string;
         icon_inactive: string;
     };
-    Icon: typeof DashboardIcon;
+    Icon: typeof DashboardIcon | IconType;
 }
