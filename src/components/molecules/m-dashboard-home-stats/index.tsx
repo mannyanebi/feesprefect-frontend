@@ -9,7 +9,7 @@ function DashboardHomeStats() {
             <NumberOfStudentsStat />
             <NumberOfClassesStat />
             <TotalAmountOfSchoolFeesStat />
-            <NumberOfStudentsStat />
+            {/* <NumberOfStudentsStat /> */}
         </div>
     );
 }
