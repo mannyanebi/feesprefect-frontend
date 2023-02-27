@@ -7,6 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { ILoginFormFieldTypes } from 'types/AllFormFieldTypes';
 import SpinnerIcon from 'components/atoms/a-spinner';
 import LoginSchema from 'utils/validators/loginFormValidator';
+import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
     const {
@@ -15,6 +16,7 @@ function LoginForm() {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         formState: { errors, isSubmitting },
     } = useForm<ILoginFormFieldTypes>({ resolver: yupResolver(LoginSchema) });
+    const navigate = useNavigate();
 
     // const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
@@ -26,6 +28,7 @@ function LoginForm() {
             });
 
             if (response.status === 200) {
+                navigate('/dashboard');
                 Toast(response.data.message, { type: 'success' });
             }
         } catch (error) {
