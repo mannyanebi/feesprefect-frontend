@@ -4,7 +4,7 @@ import TextInputField from 'components/atoms/form-fields/a-text-input-field';
 import Toast from 'components/atoms/a-toast';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { ILoginFormFieldTypes } from 'types/AllFormFieldTypes';
+import AllFormFieldTypes from 'types/AllFormFieldTypes';
 import SpinnerIcon from 'components/atoms/a-spinner';
 import LoginSchema from 'utils/validators/loginFormValidator';
 import { useNavigate } from 'react-router-dom';
@@ -16,12 +16,10 @@ function LoginForm() {
         handleSubmit,
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         formState: { errors, isSubmitting },
-    } = useForm<ILoginFormFieldTypes>({ resolver: yupResolver(LoginSchema) });
+    } = useForm<AllFormFieldTypes>({ resolver: yupResolver(LoginSchema) });
     const navigate = useNavigate();
 
-    // const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-
-    const onSubmit: SubmitHandler<ILoginFormFieldTypes> = async (data) => {
+    const onSubmit: SubmitHandler<AllFormFieldTypes> = async (data) => {
         try {
             const response = await api.post('auth/login/', {
                 username: data.Username,

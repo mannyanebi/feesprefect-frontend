@@ -9,9 +9,10 @@ import TablePagination from 'components/atoms/a-table-pagination';
 interface ITableWithPaginationProps {
     columns: readonly Column<object>[];
     data: any;
+    pageSizeValue?: number;
 }
 
-function TableWithPagination({ columns, data }: ITableWithPaginationProps) {
+function TableWithPagination({ columns, data, pageSizeValue = 10 }: ITableWithPaginationProps) {
     const {
         getTableProps,
         getTableBodyProps,
@@ -42,7 +43,7 @@ function TableWithPagination({ columns, data }: ITableWithPaginationProps) {
             columns,
             data,
             // @ts-ignore
-            initialState: { pageIndex: 0, pageSize: 10 },
+            initialState: { pageIndex: 0, pageSize: pageSizeValue },
         },
         usePagination,
     );

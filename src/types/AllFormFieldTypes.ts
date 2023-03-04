@@ -3,6 +3,11 @@ export interface ILoginFormFieldTypes {
     Password: string;
 }
 
-type AllFormFieldTypes = ILoginFormFieldTypes;
+export interface IAddNewStudentFormFieldTypes {
+    'Student Name': string;
+    'Academic Class': string;
+}
+
+type AllFormFieldTypes = ILoginFormFieldTypes & IAddNewStudentFormFieldTypes;
 
 export default AllFormFieldTypes;
