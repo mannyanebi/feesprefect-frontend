@@ -34,15 +34,6 @@ function ClassListDropdown({ setFilterBy, filterBy }: IClassListDropdownProps) {
     return (
         <select value={filterBy} onChange={(event) => setFilterBy(event.target.value)}>
             <option value="">All</option>
-            {/* <option value="pre-nursery">Pre Nursery</option>
-            <option value="nursery-1">Nursery 1</option>
-            <option value="nursery-2">Nursery 2</option>
-            <option value="nursery-3">Nursery 2</option>
-            <option value="primary-1">Primary 1</option>
-            <option value="primary-2">Primary 2</option>
-            <option value="primary-3">Primary 3</option>
-            <option value="primary-4">Primary 4</option>
-            <option value="primary-5">Primary 5</option> */}
             {classList.map((item) => (
                 <option value={item.id}>{item.name}</option>
             ))}

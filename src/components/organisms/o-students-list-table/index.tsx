@@ -12,9 +12,10 @@ function StudentsListTable() {
 
     const fetchAndSetStudentsData = useCallback(async () => {
         try {
-            const response = await api.get('students/?page=1&page_size=50');
+            const queryString: string = filterBy ? `students/?all&academic_class_id=${filterBy}` : 'students/?all';
+            const response = await api.get(queryString);
             if (response.status === 200) {
-                setStudentsListData(response.data.results);
+                setStudentsListData(response.data);
             }
         } catch (error) {
             let errorMessage;
@@ -27,7 +28,7 @@ function StudentsListTable() {
             }
             Toast(errorMessage, { type: 'error' });
         }
-    }, []);
+    }, [filterBy]);
 
     useEffect(() => {
         fetchAndSetStudentsData();
