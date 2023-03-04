@@ -1,7 +1,10 @@
 import DashboardLayout from 'components/libs/layout/dashboard';
 import Home from 'pages';
-import Dashboard from 'pages/dashboard';
-import Payments from 'pages/dashboard/payments';
+import DashboardPage from 'pages/dashboard';
+import AcademicClassesPage from 'pages/dashboard/classes';
+import PaymentsPage from 'pages/dashboard/payments';
+import StudentsPage from 'pages/dashboard/students';
+import AddNewStudent from 'pages/dashboard/students/add-new-student';
 import Login from 'pages/login';
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -13,8 +16,11 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/dashboard" element={<DashboardLayout />}>
-                    <Route index element={<Dashboard />} />
-                    <Route path="payments" element={<Payments />} />
+                    <Route index element={<DashboardPage />} />
+                    <Route path="classes" element={<AcademicClassesPage />} />
+                    <Route path="students" element={<StudentsPage />} />
+                    <Route path="students/add" element={<AddNewStudent />} />
+                    <Route path="payments" element={<PaymentsPage />} />
                 </Route>
             </Routes>
         </BrowserRouter>

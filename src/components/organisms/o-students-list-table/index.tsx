@@ -1,19 +1,27 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import api from 'api';
-import Table from 'components/atoms/a-table';
-import TableBody from 'components/atoms/a-table-body';
-import TableHead from 'components/atoms/a-table-head';
-import TableRow from 'components/atoms/a-table-row';
+import ClassListDropdown from 'components/atoms/a-class-list-select';
+import DebouncedSearchInput from 'components/atoms/a-debounced-search-input-field';
 import Toast from 'components/atoms/a-toast';
-import React, { useCallback, useEffect, useState } from 'react';
+import TableWithPagination from 'components/molecules/m-react-table-with-pagination';
+import headerColumns from 'libs/react-table-columns/StudentListTableColumns';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
-function StudentsListTable() {
-    const [studentsListData, setStudentsListData] = useState([]);
+interface IStudentsListTableProps {
+    tablePageSizeValue?: number;
+}
+
+function StudentsListTable({ tablePageSizeValue }: IStudentsListTableProps) {
+    const [studentsListData, setStudentsListData] = useState<Array<any>>([]);
+    const [searchQuery, setSearchQuery] = useState<string>('');
+    const [filterBy, setFilterBy] = useState<string>('');
 
     const fetchAndSetStudentsData = useCallback(async () => {
         try {
-            const response = await api.get('students/?page=2&page_size=50');
+            const queryString: string = `students/?all&academic_class_id=${filterBy}&name__contains=${searchQuery}`;
+            const response = await api.get(queryString);
             if (response.status === 200) {
-                setStudentsListData(response.data.results);
+                setStudentsListData(response.data);
             }
         } catch (error) {
             let errorMessage;
@@ -26,39 +34,30 @@ function StudentsListTable() {
             }
             Toast(errorMessage, { type: 'error' });
         }
-    }, []);
+    }, [filterBy, searchQuery]);
 
     useEffect(() => {
         fetchAndSetStudentsData();
     }, [fetchAndSetStudentsData]);
 
-    return (
-        <div className="overflow-x-auto">
-            <h2 className="m-4 font-bold text-2xl">List of Students</h2>
-            <Table>
-                <TableHead>
-                    <TableRow>
-                        <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">Name</th>
-                        <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">Class</th>
-                    </TableRow>
-                </TableHead>
+    const columns = useMemo(() => [...headerColumns], []);
 
-                <TableBody>
-                    {/* @ts-ignore */}
-                    {studentsListData &&
-                        studentsListData.map((item) => {
-                            return (
-                                <TableRow className="odd:bg-gray-50">
-                                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                                        {/* @ts-ignore */}
-                                        {item.name}
-                                    </td>
-                                    <td className="whitespace-nowrap px-4 py-2 text-gray-700">Primary 1</td>
-                                </TableRow>
-                            );
-                        })}
-                </TableBody>
-            </Table>
+    return (
+        <div className="flex flex-col space-y-2">
+            <div className="flex flex-row justify-between">
+                <h2 className="m-4 font-bold text-2xl">List of Students</h2>
+                <div className="flex flex-row space-x-2 items-center justify-center">
+                    <div className="flex space-x-2 items-center justify-center">
+                        <h4 className="mx-2 font-bold text-lg">Search students by name:</h4>
+                        <DebouncedSearchInput setSearchQuery={setSearchQuery} />
+                    </div>
+                    <div className="flex space-x-2 items-center justify-center">
+                        <h4 className="mx-2 font-bold text-lg">Filter by classes:</h4>
+                        <ClassListDropdown filterBy={filterBy} setFilterBy={setFilterBy} />
+                    </div>
+                </div>
+            </div>
+            <TableWithPagination columns={columns} data={studentsListData} pageSizeValue={tablePageSizeValue} />
         </div>
     );
 }
