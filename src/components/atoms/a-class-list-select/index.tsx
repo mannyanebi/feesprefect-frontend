@@ -10,9 +10,9 @@ function ClassListDropdown({ setFilterBy, filterBy }: IClassListDropdownProps) {
     const [classList, setClassList] = useState<Array<any>>([]);
     const fetchAndSetClassList = useCallback(async () => {
         try {
-            const response = await api.get('academic-class/');
+            const response = await api.get('academic-class');
             if (response.status === 200) {
-                setClassList(response.data.results);
+                setClassList(response.data);
             }
         } catch (error) {
             let errorMessage;
@@ -30,6 +30,7 @@ function ClassListDropdown({ setFilterBy, filterBy }: IClassListDropdownProps) {
     useEffect(() => {
         fetchAndSetClassList();
     }, [fetchAndSetClassList]);
+
     return (
         <select value={filterBy} onChange={(event) => setFilterBy(event.target.value)}>
             <option value="">All</option>

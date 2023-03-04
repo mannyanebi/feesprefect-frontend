@@ -8,6 +8,7 @@ import { ILoginFormFieldTypes } from 'types/AllFormFieldTypes';
 import SpinnerIcon from 'components/atoms/a-spinner';
 import LoginSchema from 'utils/validators/loginFormValidator';
 import { useNavigate } from 'react-router-dom';
+import { setAuthToken } from 'utils/auth-cookies';
 
 function LoginForm() {
     const {
@@ -28,15 +29,16 @@ function LoginForm() {
             });
 
             if (response.status === 200) {
+                setAuthToken(response.data.token);
                 navigate('/dashboard');
-                Toast(response.data.message, { type: 'success' });
+                Toast('Login Successful', { type: 'success' });
             }
         } catch (error) {
             let errorMessage;
             // @ts-ignore
             if (error.response) {
                 // @ts-ignore
-                errorMessage = error.response.data.message;
+                [errorMessage] = error.response.data.non_field_errors;
             } else {
                 errorMessage = 'Something went wrong';
             }

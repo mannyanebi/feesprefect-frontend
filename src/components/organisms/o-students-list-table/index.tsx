@@ -12,7 +12,7 @@ function StudentsListTable() {
 
     const fetchAndSetStudentsData = useCallback(async () => {
         try {
-            const response = await api.get('students/?page=2&page_size=50');
+            const response = await api.get('students/?page=1&page_size=50');
             if (response.status === 200) {
                 setStudentsListData(response.data.results);
             }
