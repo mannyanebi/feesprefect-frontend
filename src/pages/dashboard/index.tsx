@@ -2,7 +2,7 @@ import DashboardHomeStats from 'components/molecules/m-dashboard-home-stats';
 import StudentsListTable from 'components/organisms/o-students-list-table';
 import React from 'react';
 
-function Dashboard() {
+function DashboardPage() {
     return (
         <div className="flex flex-col space-y-8 px-8 py-6">
             <DashboardHomeStats />
@@ -11,4 +11,4 @@ function Dashboard() {
     );
 }
 
-export default Dashboard;
+export default DashboardPage;
