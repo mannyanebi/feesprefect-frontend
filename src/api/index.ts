@@ -3,7 +3,7 @@ import { getAuthToken } from 'utils/auth-cookies';
 
 const AxiosInstance = axios.create({
     baseURL: process.env.REACT_APP_BASE_URL,
-    timeout: 4000,
+    // timeout: 4000,
     headers: {
         'Content-type': 'application/json',
     },
