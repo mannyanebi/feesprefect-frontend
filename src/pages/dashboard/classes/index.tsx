@@ -16,7 +16,7 @@ function AcademicClassesPage() {
     const [showStudents, setShowStudents] = useState(false);
     const [filterClassId, setFilterClassId] = useState<number>(0);
 
-    const fetchAndSetStudentsData = useCallback(async () => {
+    const fetchAndSetClassesData = useCallback(async () => {
         try {
             const response = await api.get('academic-class/');
             if (response.status === 200) {
@@ -36,8 +36,8 @@ function AcademicClassesPage() {
     }, []);
 
     useEffect(() => {
-        fetchAndSetStudentsData();
-    }, [fetchAndSetStudentsData]);
+        fetchAndSetClassesData();
+    }, [fetchAndSetClassesData]);
 
     const handleOnClick = useCallback((classId: number) => {
         setFilterClassId(classId);
