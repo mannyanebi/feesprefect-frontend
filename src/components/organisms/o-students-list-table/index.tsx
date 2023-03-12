@@ -9,16 +9,19 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 interface IStudentsListTableProps {
     tablePageSizeValue?: number;
+    filterClassId?: number;
 }
 
-function StudentsListTable({ tablePageSizeValue }: IStudentsListTableProps) {
+function StudentsListTable({ tablePageSizeValue, filterClassId }: IStudentsListTableProps) {
     const [studentsListData, setStudentsListData] = useState<Array<any>>([]);
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [filterBy, setFilterBy] = useState<string>('');
 
     const fetchAndSetStudentsData = useCallback(async () => {
         try {
-            const queryString: string = `students/?all&academic_class_id=${filterBy}&name__contains=${searchQuery}`;
+            const queryString: string = `students/?all&academic_class_id=${
+                filterClassId ?? filterBy
+            }&name__contains=${searchQuery}`;
             const response = await api.get(queryString);
             if (response.status === 200) {
                 setStudentsListData(response.data);
