@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Table from 'components/atoms/a-table';
 import TableBody from 'components/atoms/a-table-body';
 import TableHead from 'components/atoms/a-table-head';
 import TableRow from 'components/atoms/a-table-row';
+import { MdViewSidebar } from 'react-icons/md';
 import { useTable, usePagination, Row, Column } from 'react-table';
 import TablePagination from 'components/atoms/a-table-pagination';
+import ButtonWithIcon from 'components/atoms/a-button-with-icon';
+import { useNavigate } from 'react-router-dom';
 
 interface ITableWithPaginationProps {
     columns: readonly Column<object>[];
@@ -47,6 +50,13 @@ function TableWithPagination({ columns, data, pageSizeValue = 10 }: ITableWithPa
         },
         usePagination,
     );
+
+    const navigate = useNavigate();
+
+    const handleViewStudent = useCallback((uuid: string) => {
+        navigate(`/dashboard/students/view/${uuid}`);
+    }, []);
+
     return (
         <div className="overflow-x-auto flex flex-col space-y-4">
             <Table {...getTableProps()}>
@@ -77,6 +87,16 @@ function TableWithPagination({ columns, data, pageSizeValue = 10 }: ITableWithPa
                                         </td>
                                     );
                                 })}
+                                <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                                    {/* @ts-ignore */}
+                                    <ButtonWithIcon
+                                        icon={MdViewSidebar}
+                                        /* @ts-ignore */
+                                        onClick={() => handleViewStudent(row.cells[0].row.original.uuid)}
+                                    >
+                                        View Student
+                                    </ButtonWithIcon>
+                                </td>
                             </TableRow>
                         );
                     })}

@@ -8,6 +8,10 @@ export interface IAddNewStudentFormFieldTypes {
     'Academic Class': string;
 }
 
-type AllFormFieldTypes = ILoginFormFieldTypes & IAddNewStudentFormFieldTypes;
+export interface IAddNewClassFormFieldTypes {
+    'Academic Class Name': string;
+}
+
+type AllFormFieldTypes = ILoginFormFieldTypes & IAddNewStudentFormFieldTypes & IAddNewClassFormFieldTypes;
 
 export default AllFormFieldTypes;
