@@ -1,8 +1,9 @@
-import { useLocation } from 'react-router-dom';
-import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useCallback } from 'react';
 import SidebarNavItem from 'components/atoms/a-sidebar-item';
 import NavItems from 'components/libs/NavItems';
 import FeesprefectLogo from 'components/atoms/a-feesprefect-logo';
+import { removeAuthToken } from 'utils/auth-cookies';
 
 const style = {
     active: 'bg-primary rounded-full text-white',
@@ -16,6 +17,12 @@ const style = {
 
 function Sidebar() {
     const { pathname } = useLocation();
+    const navigate = useNavigate();
+    const handleLogout = useCallback(() => {
+        removeAuthToken();
+        navigate('/login');
+    }, [navigate]);
+
     return (
         <div id="sidebar" className="shadow-lg shadow-teal-700/30 h-full bg-white fixed top-0 left-0 py-1.5 px-11">
             <div id="logo-content">
@@ -43,7 +50,11 @@ function Sidebar() {
             </ul>
             <div id="profile-content" className="absolute bottom-0 left-0 w-full h-[4.5rem] mx-auto">
                 <div className="flex w-full">
-                    <button className="mx-auto bg-primary rounded-full text-white w-3/5 h-[3.125rem]" type="button">
+                    <button
+                        onClick={() => handleLogout()}
+                        className="mx-auto bg-primary rounded-full text-white w-3/5 h-[3.125rem]"
+                        type="button"
+                    >
                         Logout
                     </button>
                 </div>

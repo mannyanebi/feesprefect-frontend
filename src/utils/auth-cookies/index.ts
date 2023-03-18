@@ -4,8 +4,10 @@ const TOKEN_NAME = 'authToken';
 
 export function checkAuthToken() {
     const token = Cookies.get(TOKEN_NAME);
-
-    return token;
+    if (token) {
+        return true;
+    }
+    return false;
 }
 
 export function getAuthToken() {
