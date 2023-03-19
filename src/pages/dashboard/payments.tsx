@@ -1,7 +1,8 @@
+import SchoolFeesPaymentsListTable from 'components/organisms/o-school-fees-payments-list-table';
 import React from 'react';
 
 function PaymentsPage() {
-    return <div>PaymentsPage</div>;
+    return <SchoolFeesPaymentsListTable />;
 }
 
 export default PaymentsPage;
