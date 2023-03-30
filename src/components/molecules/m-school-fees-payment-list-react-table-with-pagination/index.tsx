@@ -6,6 +6,8 @@ import TableRow from 'components/atoms/a-table-row';
 // import { MdViewSidebar } from 'react-icons/md';
 import { useTable, usePagination, Row, Column } from 'react-table';
 import TablePagination from 'components/atoms/a-table-pagination';
+import GreenCheckMark from 'components/atoms/a-green-check-mark';
+import RedCrossMark from 'components/atoms/a-red-cross-mark';
 // import ButtonWithIcon from 'components/atoms/a-button-with-icon';
 // import { useNavigate } from 'react-router-dom';
 
@@ -78,6 +80,17 @@ function SchoolFeesPaymentTableWithPagination({ columns, data, pageSizeValue = 1
                         return (
                             <TableRow className="odd:bg-gray-50" {...row.getRowProps()}>
                                 {row.cells.map((cell) => {
+                                    if (cell.column.id === 'isPaymentComplete') {
+                                        return (
+                                            <td
+                                                className="whitespace-nowrap px-4 py-2 text-gray-700"
+                                                {...cell.getCellProps()}
+                                            >
+                                                {/* @ts-ignore */}
+                                                {cell.value ? <GreenCheckMark /> : <RedCrossMark />}
+                                            </td>
+                                        );
+                                    }
                                     return (
                                         <td
                                             className="whitespace-nowrap px-4 py-2 text-gray-700"

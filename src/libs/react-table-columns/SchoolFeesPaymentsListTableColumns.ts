@@ -13,7 +13,11 @@ const headerColumns = [
     },
     {
         Header: 'Term',
-        accessor: 'schoolFee.term',
+        accessor: 'schoolFee.session.term',
+    },
+    {
+        Header: 'School Fees Amount',
+        accessor: 'schoolFee.amount',
     },
     {
         Header: 'Amount Paid',
