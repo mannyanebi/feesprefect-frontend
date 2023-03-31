@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react';
 import StudentAvatar from 'images/jpeg/student-avatar.jpeg';
-import TermPaymentDetails from 'components/molecules/m-term-payment-details';
 import FormModal from '../o-form-modal';
 import AddPaymentForm from '../o-add-payment-form';
+import StudentPaymentHistory from '../o-payment-history';
 
 interface IStudentDetailsCardProps {
     studentUUID: string;
@@ -12,10 +11,13 @@ interface IStudentDetailsCardProps {
 
 function StudentDetailsCard({ studentUUID, studentData }: IStudentDetailsCardProps) {
     const [isOpenAddStudentPaymentModalForm, setIsOpenAddStudentPaymentModalForm] = useState<boolean>(false);
+    const [refreshStudentPaymentHistory, setRefreshStudentPaymentHistory] = useState<boolean>(false);
 
     const addStudentOnclickHandler = () => {
         setIsOpenAddStudentPaymentModalForm(true);
+        setRefreshStudentPaymentHistory(false);
     };
+
     return (
         <>
             <FormModal
@@ -27,6 +29,7 @@ function StudentDetailsCard({ studentUUID, studentData }: IStudentDetailsCardPro
                     studentUUID={studentUUID}
                     academicClassId={studentData?.academicClass?.id}
                     setIsOpen={setIsOpenAddStudentPaymentModalForm}
+                    setRefreshStudentPaymentHistory={setRefreshStudentPaymentHistory}
                 />
             </FormModal>
             <div className="flex flex-col space-y-8">
@@ -65,16 +68,11 @@ function StudentDetailsCard({ studentUUID, studentData }: IStudentDetailsCardPro
                                 </div>
                             </div>
                         </div>
-                        <div className="w-3/5 flex flex-col space-y-5 border-l justify-center p-6">
-                            <div className="w-full flex flex-row space-x-4 items-center justify-between">
-                                <h5 className="text-lg font-medium text-neutral-800">Payments</h5>
-                                <h5 className="text-sm text-gray-500">Transaction History</h5>
-                            </div>
-                            <TermPaymentDetails />
-                            <TermPaymentDetails />
-                            <TermPaymentDetails />
-                            <p className="text-xs text-neutral-500 dark:text-neutral-300">Last updated 3 mins ago</p>
-                        </div>
+                        <StudentPaymentHistory
+                            studentUUID={studentUUID}
+                            academicClassId={studentData?.academicClass?.id}
+                            refreshStudentPaymentHistory={refreshStudentPaymentHistory}
+                        />
                     </div>
                 </div>
                 <div className="w-10/12 mx-auto">

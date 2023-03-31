@@ -13,9 +13,15 @@ interface IAddPaymentFormProps {
     studentUUID: string;
     academicClassId?: number;
     setIsOpen: Dispatch<SetStateAction<boolean>>;
+    setRefreshStudentPaymentHistory: Dispatch<SetStateAction<boolean>>;
 }
 
-function AddPaymentForm({ academicClassId, setIsOpen, studentUUID }: IAddPaymentFormProps) {
+function AddPaymentForm({
+    academicClassId,
+    setIsOpen,
+    studentUUID,
+    setRefreshStudentPaymentHistory,
+}: IAddPaymentFormProps) {
     const {
         register,
         handleSubmit,
@@ -36,6 +42,7 @@ function AddPaymentForm({ academicClassId, setIsOpen, studentUUID }: IAddPayment
 
             if (response.status === 201) {
                 setIsOpen(false);
+                setRefreshStudentPaymentHistory(true);
                 Toast('Payment added.', { type: 'success' });
             }
         } catch (error) {
