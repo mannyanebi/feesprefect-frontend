@@ -1,17 +1,25 @@
-export interface ILoginFormFieldTypes {
+export interface LoginFormFieldTypes {
     Username: string;
     Password: string;
 }
 
-export interface IAddNewStudentFormFieldTypes {
+export interface AddNewStudentFormFieldTypes {
     'Student Name': string;
     'Academic Class': string;
 }
 
-export interface IAddNewClassFormFieldTypes {
+export interface AddNewClassFormFieldTypes {
     'Academic Class Name': string;
 }
 
-type AllFormFieldTypes = ILoginFormFieldTypes & IAddNewStudentFormFieldTypes & IAddNewClassFormFieldTypes;
+export interface AddPaymentFormFieldTypes {
+    'School Fee': string;
+    'Amount Paid': number;
+}
+
+type AllFormFieldTypes = LoginFormFieldTypes &
+    AddNewStudentFormFieldTypes &
+    AddNewClassFormFieldTypes &
+    AddPaymentFormFieldTypes;
 
 export default AllFormFieldTypes;

@@ -30,7 +30,7 @@ function ViewStudent() {
     useEffect(() => {
         fetchAndSetStudentData();
     }, [fetchAndSetStudentData]);
-    return <StudentDetailsCard studentData={studentData} />;
+    return <StudentDetailsCard studentUUID={studentUUID as string} studentData={studentData} />;
 }
 
 export default ViewStudent;
