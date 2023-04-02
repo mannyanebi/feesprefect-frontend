@@ -11,12 +11,15 @@ import { BsArrowLeftCircleFill, BsViewList } from 'react-icons/bs';
 import StudentsListTable from 'components/organisms/o-students-list-table';
 import { Link } from 'react-router-dom';
 import SectionLoader from 'components/atoms/a-section-spinner';
+import FormModal from 'components/organisms/o-form-modal';
+import PromoteClassStudentsForm from 'components/organisms/o-promote-class-students-form';
 
 function AcademicClassesPage() {
     const [classesListData, setClassesListData] = useState([]);
     const [showStudents, setShowStudents] = useState(false);
     const [filterClassId, setFilterClassId] = useState<number>(0);
     const [loading, setLoading] = useState(false);
+    const [isOpenPromoteClassStudentsForm, setIsOpenPromoteClassStudentsForm] = useState(false);
 
     const fetchAndSetClassesData = useCallback(async () => {
         try {
@@ -53,6 +56,8 @@ function AcademicClassesPage() {
         setShowStudents(false);
     }, []);
 
+    const handlePromoteClassStudentsOnclick = () => [setIsOpenPromoteClassStudentsForm(true)];
+
     if (loading) {
         return <SectionLoader />;
     }
@@ -77,48 +82,71 @@ function AcademicClassesPage() {
     }
 
     return (
-        <div className="flex flex-col space-y-6">
-            <div>
-                <Link
-                    className="rounded-md border border-secondary bg-secondary px-9 py-3 font-medium text-white hover:bg-white hover:text-black focus:outline-none focus:ring active:text-primary"
-                    to="add"
-                >
-                    Add new class
-                </Link>
-            </div>
-            <div className="overflow-x-auto">
-                <h2 className="m-4 font-bold text-2xl">List of Classes</h2>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">Name</th>
-                            <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">Action</th>
-                        </TableRow>
-                    </TableHead>
+        <>
+            <FormModal
+                title="Promoto Class Students"
+                isOpen={isOpenPromoteClassStudentsForm}
+                setIsOpen={setIsOpenPromoteClassStudentsForm}
+            >
+                <PromoteClassStudentsForm setIsOpen={setIsOpenPromoteClassStudentsForm} />
+            </FormModal>
+            <div className="flex flex-col space-y-6">
+                <div className="flex flex-row space-x-4">
+                    <Link
+                        className="rounded-md border border-secondary bg-secondary px-9 py-3 font-medium text-white hover:bg-white hover:text-black focus:outline-none focus:ring active:text-primary"
+                        to="add"
+                    >
+                        Add new class
+                    </Link>
+                    <button
+                        type="button"
+                        onClick={handlePromoteClassStudentsOnclick}
+                        className="rounded-md border border-secondary bg-secondary px-7 py-2 font-medium text-white hover:bg-white hover:text-black focus:outline-none focus:ring active:text-primary"
+                    >
+                        Promote Students
+                    </button>
+                </div>
+                <div className="overflow-x-auto">
+                    <h2 className="m-4 font-bold text-2xl">List of Classes</h2>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
+                                    Name
+                                </th>
+                                <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
+                                    Action
+                                </th>
+                            </TableRow>
+                        </TableHead>
 
-                    <TableBody>
-                        {/* @ts-ignore */}
-                        {classesListData &&
-                            classesListData.map((item) => {
-                                return (
-                                    <TableRow key={uuidv4()} className="odd:bg-gray-50">
-                                        <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                                            {/* @ts-ignore */}
-                                            {item.name}
-                                        </td>
-                                        <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                                            {/* @ts-ignore */}
-                                            <ButtonWithIcon icon={BsViewList} onClick={() => handleOnClick(item.id)}>
-                                                View Class
-                                            </ButtonWithIcon>
-                                        </td>
-                                    </TableRow>
-                                );
-                            })}
-                    </TableBody>
-                </Table>
+                        <TableBody>
+                            {/* @ts-ignore */}
+                            {classesListData &&
+                                classesListData.map((item: any) => {
+                                    return (
+                                        <TableRow key={uuidv4()} className="odd:bg-gray-50">
+                                            <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                                                {/* @ts-ignore */}
+                                                {item.name}
+                                            </td>
+                                            <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                                                {/* @ts-ignore */}
+                                                <ButtonWithIcon
+                                                    icon={BsViewList}
+                                                    onClick={() => handleOnClick(item.id)}
+                                                >
+                                                    View Class
+                                                </ButtonWithIcon>
+                                            </td>
+                                        </TableRow>
+                                    );
+                                })}
+                        </TableBody>
+                    </Table>
+                </div>
             </div>
-        </div>
+        </>
     );
 }
 

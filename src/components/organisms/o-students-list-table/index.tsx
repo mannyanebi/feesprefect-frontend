@@ -69,7 +69,13 @@ function StudentsListTable({ tablePageSizeValue, filterClassId }: IStudentsListT
                     </div>
                 </div>
             </div>
-            <TableWithPagination columns={columns} data={studentsListData} pageSizeValue={tablePageSizeValue} />
+            {studentsListData.length > 0 ? (
+                <TableWithPagination columns={columns} data={studentsListData} pageSizeValue={tablePageSizeValue} />
+            ) : (
+                <div className="flex items-center justify-center min-h-[30vh]">
+                    <h2 className="m-4 text-center text-xl">No students found</h2>
+                </div>
+            )}
         </div>
     );
 }
