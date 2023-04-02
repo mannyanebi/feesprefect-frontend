@@ -10,19 +10,24 @@ import ButtonWithIcon from 'components/atoms/a-button-with-icon';
 import { BsArrowLeftCircleFill, BsViewList } from 'react-icons/bs';
 import StudentsListTable from 'components/organisms/o-students-list-table';
 import { Link } from 'react-router-dom';
+import SectionLoader from 'components/atoms/a-section-spinner';
 
 function AcademicClassesPage() {
     const [classesListData, setClassesListData] = useState([]);
     const [showStudents, setShowStudents] = useState(false);
     const [filterClassId, setFilterClassId] = useState<number>(0);
+    const [loading, setLoading] = useState(false);
 
     const fetchAndSetClassesData = useCallback(async () => {
         try {
+            setLoading(true);
             const response = await api.get('academic-class/');
             if (response.status === 200) {
                 setClassesListData(response.data);
             }
+            setLoading(false);
         } catch (error) {
+            setLoading(false);
             let errorMessage;
             // @ts-ignore
             if (error.response) {
@@ -47,6 +52,10 @@ function AcademicClassesPage() {
     const setShowStudentsToFalse = useCallback(() => {
         setShowStudents(false);
     }, []);
+
+    if (loading) {
+        return <SectionLoader />;
+    }
 
     if (showStudents) {
         return (
