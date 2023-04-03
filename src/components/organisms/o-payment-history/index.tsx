@@ -22,7 +22,7 @@ function StudentPaymentHistory({
             return;
         }
         try {
-            const response = await api.get(`student-school-fees-payments/${studentUUID}/${academicClassId}`);
+            const response = await api.get(`student-school-fees-payments/${studentUUID}/`);
             if (response.status === 200) {
                 setStudentPaymentHistoryData(response.data.data);
             }
@@ -43,7 +43,7 @@ function StudentPaymentHistory({
         fetchAndSetStudentPaymentHistoryData();
     }, [fetchAndSetStudentPaymentHistoryData, refreshStudentPaymentHistory]);
     return (
-        <div className="w-3/5 flex flex-col space-y-5 border-l justify-center p-6">
+        <div className="w-3/5 flex flex-col space-y-5 border-l justify-center px-6 overflow-y-auto">
             <div className="w-full flex flex-row space-x-4 items-center justify-between">
                 <h5 className="text-lg font-medium text-neutral-800">Payments</h5>
                 <h5 className="text-sm text-gray-500">Transaction History</h5>
