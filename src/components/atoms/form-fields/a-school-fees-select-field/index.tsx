@@ -73,8 +73,8 @@ function SchoolFeesSelectInput({
                 >
                     {classList.map((item) => (
                         // eslint-disable-next-line no-constant-condition
-                        <option value={item.id} selected={true ? selectedValue === item.id : false}>
-                            {item.academicClass.name}
+                        <option value={item.id} selected={true ? selectedValue === item.academicClass.id : false}>
+                            {`${item.session.name} - ${item.academicClass.name} - ${item.session.term}`}
                         </option>
                     ))}
                 </select>

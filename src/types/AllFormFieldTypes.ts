@@ -17,9 +17,15 @@ export interface AddPaymentFormFieldTypes {
     'Amount Paid': number;
 }
 
+export interface PromoteClassStudentsFormTypes {
+    'Previous Academic Class': string;
+    'New Academic Class': string;
+}
+
 type AllFormFieldTypes = LoginFormFieldTypes &
     AddNewStudentFormFieldTypes &
     AddNewClassFormFieldTypes &
-    AddPaymentFormFieldTypes;
+    AddPaymentFormFieldTypes &
+    PromoteClassStudentsFormTypes;
 
 export default AllFormFieldTypes;
