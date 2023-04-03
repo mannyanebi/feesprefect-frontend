@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import api from 'api';
-import ClassListDropdown from 'components/atoms/a-class-list-select';
-import DebouncedSearchInput from 'components/atoms/a-debounced-search-input-field';
+import SectionLoader from 'components/atoms/a-section-spinner';
 import Toast from 'components/atoms/a-toast';
 import SchoolFeesPaymentTableWithPagination from 'components/molecules/m-school-fees-payment-list-react-table-with-pagination';
 import headerColumns from 'libs/react-table-columns/SchoolFeesPaymentsListTableColumns';
@@ -14,16 +13,20 @@ interface ISchoolFeesPaymentsListTableProps {
 
 function SchoolFeesPaymentsListTable({ tablePageSizeValue, filterClassId }: ISchoolFeesPaymentsListTableProps) {
     const [schoolFeesPaymentsListData, setSchoolFeesPaymentsListData] = useState<Array<any>>([]);
+    const [loading, setLoading] = useState<boolean>(false);
     // const [filterBy, setFilterBy] = useState<string>('');
 
     const fetchAndSetSchoolFeesPaymentsData = useCallback(async () => {
         try {
+            setLoading(true);
             const queryString: string = 'school-fees-payment/?all';
             const response = await api.get(queryString);
             if (response.status === 200) {
                 setSchoolFeesPaymentsListData(response.data);
             }
+            setLoading(false);
         } catch (error) {
+            setLoading(false);
             let errorMessage;
             // @ts-ignore
             if (error.response) {
@@ -41,6 +44,10 @@ function SchoolFeesPaymentsListTable({ tablePageSizeValue, filterClassId }: ISch
     }, [fetchAndSetSchoolFeesPaymentsData]);
 
     const columns = useMemo(() => [...headerColumns], []);
+
+    if (loading) {
+        return <SectionLoader />;
+    }
 
     return (
         <div className="flex flex-col space-y-2">

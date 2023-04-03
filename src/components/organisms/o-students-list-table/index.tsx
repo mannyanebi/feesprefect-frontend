@@ -2,6 +2,7 @@
 import api from 'api';
 import ClassListDropdown from 'components/atoms/a-class-list-select';
 import DebouncedSearchInput from 'components/atoms/a-debounced-search-input-field';
+import SectionLoader from 'components/atoms/a-section-spinner';
 import Toast from 'components/atoms/a-toast';
 import TableWithPagination from 'components/molecules/m-student-list-react-table-with-pagination';
 import headerColumns from 'libs/react-table-columns/StudentListTableColumns';
@@ -16,9 +17,11 @@ function StudentsListTable({ tablePageSizeValue, filterClassId }: IStudentsListT
     const [studentsListData, setStudentsListData] = useState<Array<any>>([]);
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [filterBy, setFilterBy] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(false);
 
     const fetchAndSetStudentsData = useCallback(async () => {
         try {
+            setLoading(true);
             const queryString: string = `students/?all&academic_class_id=${
                 filterClassId ?? filterBy
             }&name__contains=${searchQuery}`;
@@ -26,7 +29,9 @@ function StudentsListTable({ tablePageSizeValue, filterClassId }: IStudentsListT
             if (response.status === 200) {
                 setStudentsListData(response.data);
             }
+            setLoading(false);
         } catch (error) {
+            setLoading(false);
             let errorMessage;
             // @ts-ignore
             if (error.response) {
@@ -45,6 +50,10 @@ function StudentsListTable({ tablePageSizeValue, filterClassId }: IStudentsListT
 
     const columns = useMemo(() => [...headerColumns], []);
 
+    if (loading) {
+        return <SectionLoader />;
+    }
+
     return (
         <div className="flex flex-col space-y-2">
             <div className="flex flex-row justify-between">
@@ -60,7 +69,13 @@ function StudentsListTable({ tablePageSizeValue, filterClassId }: IStudentsListT
                     </div>
                 </div>
             </div>
-            <TableWithPagination columns={columns} data={studentsListData} pageSizeValue={tablePageSizeValue} />
+            {studentsListData.length > 0 ? (
+                <TableWithPagination columns={columns} data={studentsListData} pageSizeValue={tablePageSizeValue} />
+            ) : (
+                <div className="flex items-center justify-center min-h-[30vh]">
+                    <h2 className="m-4 text-center text-xl">No students found</h2>
+                </div>
+            )}
         </div>
     );
 }
