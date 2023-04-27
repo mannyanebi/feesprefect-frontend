@@ -6,6 +6,10 @@ export interface LoginFormFieldTypes {
 export interface AddNewStudentFormFieldTypes {
     'Student Name': string;
     'Academic Class': string;
+    'Date of Birth': string;
+    'Parent/Guardian Name': string;
+    'Parent/Guardian Phone Number': number;
+    'Home Address': string;
 }
 
 export interface AddNewClassFormFieldTypes {

@@ -40,7 +40,13 @@ function ViewStudent() {
         return <SectionLoader />;
     }
 
-    return <StudentDetailsCard studentUUID={studentUUID as string} studentData={studentData} />;
+    return (
+        <StudentDetailsCard
+            refetchStudentData={fetchAndSetStudentData}
+            studentUUID={studentUUID as string}
+            studentData={studentData}
+        />
+    );
 }
 
 export default ViewStudent;
