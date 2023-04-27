@@ -24,7 +24,7 @@ function TextInputField({
     type,
     className,
     inputFieldClassName,
-    // value: fieldValue,
+    value: fieldValue,
     // onChangeHandler,
     error,
     register,
@@ -60,7 +60,7 @@ function TextInputField({
                     id={inputFieldId}
                     placeholder="placeholder"
                     className={classNameStyle}
-                    // value={fieldValue}
+                    defaultValue={fieldValue}
                     {...register(label)}
                     // onChange={onChangeHandler}
                 />

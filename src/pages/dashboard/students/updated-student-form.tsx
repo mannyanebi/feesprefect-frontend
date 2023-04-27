@@ -1,14 +1,22 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { yupResolver } from '@hookform/resolvers/yup';
 import api from 'api';
 import Toast from 'components/atoms/a-toast';
 import StudentInformationForm from 'components/organisms/o-student-information-form';
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import AllFormFieldTypes from 'types/AllFormFieldTypes';
 import AddNewStudentSchema from 'utils/validators/addNewStudentFormValidator';
 
-function AddNewStudent() {
+interface IUpdateStudentFormProps {
+    studentUUID: string;
+    studentData: any;
+    setIsOpen: Dispatch<SetStateAction<boolean>>;
+    refetchStudentData: () => Promise<void>;
+}
+
+function UpdateStudentForm({ studentData, studentUUID, setIsOpen, refetchStudentData }: IUpdateStudentFormProps) {
     const {
         register,
         handleSubmit,
@@ -18,7 +26,7 @@ function AddNewStudent() {
 
     const onSubmit: SubmitHandler<AllFormFieldTypes> = async (data) => {
         try {
-            const response = await api.post('students/', {
+            const response = await api.put(`students/${studentUUID}/`, {
                 academicClass: {
                     id: data['Academic Class'],
                 },
@@ -29,9 +37,10 @@ function AddNewStudent() {
                 homeAddress: data['Home Address'],
             });
 
-            if (response.status === 201) {
-                navigate('/dashboard/students');
-                Toast('New student added.', { type: 'success' });
+            if (response.status === 200) {
+                Toast('Student information updated.', { type: 'success' });
+                refetchStudentData();
+                setIsOpen(false);
             }
         } catch (error) {
             let errorMessage;
@@ -47,19 +56,15 @@ function AddNewStudent() {
     };
 
     return (
-        <div className="w-3/5 mx-auto">
-            <div className="flex flex-col justify-center items-center">
-                <h2 className="m-4 font-bold text-2xl">Add a new student</h2>
-                <StudentInformationForm
-                    handleSubmit={handleSubmit}
-                    onSubmit={onSubmit}
-                    register={register}
-                    errors={errors}
-                    isSubmitting={isSubmitting}
-                />
-            </div>
-        </div>
+        <StudentInformationForm
+            studentData={studentData}
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            register={register}
+            errors={errors}
+            isSubmitting={isSubmitting}
+        />
     );
 }
 
-export default AddNewStudent;
+export default UpdateStudentForm;

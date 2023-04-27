@@ -12,7 +12,7 @@ interface IAcademicClassSelectInputProps<T extends FieldValues> {
     labelName?: string;
     className?: string;
     inputFieldClassName?: string;
-    // value?: string | number;
+    value?: string | number;
     // eslint-disable-next-line no-undef
     // onChangeHandler?: (event: ChangeEvent<HTMLSelectElement>) => void;
     error: FieldError | undefined;
@@ -24,7 +24,7 @@ function AcademicClassSelectInput({
     labelName,
     className,
     inputFieldClassName,
-    // value: fieldValue,
+    value: fieldValue,
     // onChangeHandler,
     error,
     register,
@@ -72,7 +72,9 @@ function AcademicClassSelectInput({
                     {...register(label)}
                 >
                     {classList.map((item) => (
-                        <option value={item.id}>{item.name}</option>
+                        <option selected={(fieldValue && fieldValue === item.id) as boolean} value={item.id}>
+                            {item.name}
+                        </option>
                     ))}
                 </select>
                 <span className={FieldNameStyle}>{labelName || label}</span>
