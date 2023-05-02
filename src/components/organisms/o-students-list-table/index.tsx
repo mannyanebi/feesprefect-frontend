@@ -59,10 +59,10 @@ function StudentsListTable({ tablePageSizeValue, filterClassId }: IStudentsListT
             <div className="flex flex-row justify-between">
                 <h2 className="m-4 font-bold text-2xl">List of Students</h2>
                 <div className="flex flex-row space-x-2 items-center justify-center">
-                    <div className="flex space-x-2 items-center justify-center">
+                    {/* <div className="flex space-x-2 items-center justify-center">
                         <h4 className="mx-2 font-bold text-lg">Search students by name:</h4>
                         <DebouncedSearchInput setSearchQuery={setSearchQuery} />
-                    </div>
+                    </div> */}
                     <div className="flex space-x-2 items-center justify-center">
                         <h4 className="mx-2 font-bold text-lg">Filter by classes:</h4>
                         <ClassListDropdown filterBy={filterBy} setFilterBy={setFilterBy} />
