@@ -24,14 +24,14 @@ function SearchStudent() {
 
     const onSubmit: SubmitHandler<AllFormFieldTypes> = async (data) => {
         try {
-            const searchQuery = data['Search Name'];
             setLoading(true);
-            const queryString: string = `students/?all&name__contains=${searchQuery}`;
-            const response = await api.get(queryString);
-            if (response.status === 200) {
-                setStudentsListData(response.data);
-            }
-            setLoading(false);
+            // const searchQuery = data['Search Name'];
+            // const queryString: string = `students/?all&name__contains=${searchQuery}`;
+            // const response = await api.get(queryString);
+            // if (response.status === 200) {
+            //     setStudentsListData(response.data);
+            // }
+            // setLoading(false);
         } catch (error) {
             setLoading(false);
             let errorMessage;
@@ -63,8 +63,13 @@ function SearchStudent() {
                         register={register}
                         error={errors['Search Name']}
                     />
-                    {isSubmitting ? (
-                        <SpinnerIcon />
+                    {loading ? (
+                        <button
+                            type="button"
+                            className="w-[10rem] h-[3.125rem] inline-flex items-center gap-2 rounded border border-indigo-600 bg-indigo-600 px-8 py-3 text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
+                        >
+                            <SpinnerIcon />
+                        </button>
                     ) : (
                         <span>
                             <ButtonWithIcon type="submit" disabled={isSubmitting} icon={AiOutlineSearch}>
