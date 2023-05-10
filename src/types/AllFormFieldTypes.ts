@@ -26,10 +26,15 @@ export interface PromoteClassStudentsFormTypes {
     'New Academic Class': string;
 }
 
+export interface SearchStudentFormTypes {
+    'Search Name': string;
+}
+
 type AllFormFieldTypes = LoginFormFieldTypes &
     AddNewStudentFormFieldTypes &
     AddNewClassFormFieldTypes &
     AddPaymentFormFieldTypes &
-    PromoteClassStudentsFormTypes;
+    PromoteClassStudentsFormTypes &
+    SearchStudentFormTypes;
 
 export default AllFormFieldTypes;

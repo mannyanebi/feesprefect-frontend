@@ -6,6 +6,7 @@ import AddNewClass from 'pages/dashboard/classes/add-new-class';
 import PaymentsPage from 'pages/dashboard/payments';
 import StudentsPage from 'pages/dashboard/students';
 import AddNewStudent from 'pages/dashboard/students/add-new-student';
+import SearchStudent from 'pages/dashboard/students/search-student';
 import ViewStudent from 'pages/dashboard/students/view-student';
 import Login from 'pages/login';
 import React from 'react';
@@ -23,6 +24,7 @@ function App() {
                     <Route path="classes/add" element={<AddNewClass />} />
                     <Route path="students" element={<StudentsPage />} />
                     <Route path="students/add" element={<AddNewStudent />} />
+                    <Route path="students/search" element={<SearchStudent />} />
                     <Route path="students/view/:studentUUID" element={<ViewStudent />} />
                     <Route path="payments" element={<PaymentsPage />} />
                 </Route>
