@@ -61,72 +61,80 @@ function SchoolFeesPaymentTableWithPagination({ columns, data, pageSizeValue = 1
 
     return (
         <div className="overflow-x-auto flex flex-col space-y-4">
-            <Table {...getTableProps()}>
-                <TableHead>
-                    {headerGroups.map((headerGroup) => (
-                        <TableRow {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map((column) => (
-                                <th className="text-left px-4 py-2" {...column.getHeaderProps()}>
-                                    {column.render('Header')}
-                                </th>
+            {data?.length > 0 ? (
+                <>
+                    <Table {...getTableProps()}>
+                        <TableHead>
+                            {headerGroups.map((headerGroup) => (
+                                <TableRow {...headerGroup.getHeaderGroupProps()}>
+                                    {headerGroup.headers.map((column) => (
+                                        <th className="text-left px-4 py-2" {...column.getHeaderProps()}>
+                                            {column.render('Header')}
+                                        </th>
+                                    ))}
+                                </TableRow>
                             ))}
-                        </TableRow>
-                    ))}
-                </TableHead>
+                        </TableHead>
 
-                <TableBody {...getTableBodyProps()}>
-                    {page.map((row: Row<object>) => {
-                        prepareRow(row);
-                        return (
-                            <TableRow className="odd:bg-gray-50" {...row.getRowProps()}>
-                                {row.cells.map((cell) => {
-                                    if (cell.column.id === 'isPaymentComplete') {
-                                        return (
-                                            <td
-                                                className="whitespace-nowrap px-4 py-2 text-gray-700"
-                                                {...cell.getCellProps()}
-                                            >
-                                                {/* @ts-ignore */}
-                                                {cell.value ? <GreenCheckMark /> : <RedCrossMark />}
-                                            </td>
-                                        );
-                                    }
-                                    return (
-                                        <td
-                                            className="whitespace-nowrap px-4 py-2 text-gray-700"
-                                            {...cell.getCellProps()}
-                                        >
-                                            {cell.render('Cell')}
-                                        </td>
-                                    );
-                                })}
-                                {/* <td className="whitespace-nowrap px-4 py-2 text-gray-700"> */}
-                                {/* @ts-ignore */}
-                                {/* <ButtonWithIcon
-                                        icon={MdViewSidebar} */}
-                                {/* /* @ts-ignore  */}
-                                {/* onClick={() => handleViewStudent(row.cells[0].row.original.uuid)}
-                                    >
-                                        View Student
-                                    </ButtonWithIcon>
-                                </td> */}
-                            </TableRow>
-                        );
-                    })}
-                </TableBody>
-            </Table>
-            <TablePagination
-                canNextPage={canNextPage}
-                canPreviousPage={canPreviousPage}
-                gotoPage={gotoPage}
-                nextPage={nextPage}
-                pageCount={pageCount}
-                pageIndex={pageIndex}
-                pageOptions={pageOptions}
-                pageSize={pageSize}
-                previousPage={previousPage}
-                setPageSize={setPageSize}
-            />
+                        <TableBody {...getTableBodyProps()}>
+                            {page.map((row: Row<object>) => {
+                                prepareRow(row);
+                                return (
+                                    <TableRow className="odd:bg-gray-50" {...row.getRowProps()}>
+                                        {row.cells.map((cell) => {
+                                            if (cell.column.id === 'isPaymentComplete') {
+                                                return (
+                                                    <td
+                                                        className="whitespace-nowrap px-4 py-2 text-gray-700"
+                                                        {...cell.getCellProps()}
+                                                    >
+                                                        {/* @ts-ignore */}
+                                                        {cell.value ? <GreenCheckMark /> : <RedCrossMark />}
+                                                    </td>
+                                                );
+                                            }
+                                            return (
+                                                <td
+                                                    className="whitespace-nowrap px-4 py-2 text-gray-700"
+                                                    {...cell.getCellProps()}
+                                                >
+                                                    {cell.render('Cell')}
+                                                </td>
+                                            );
+                                        })}
+                                        {/* <td className="whitespace-nowrap px-4 py-2 text-gray-700"> */}
+                                        {/* @ts-ignore */}
+                                        {/* <ButtonWithIcon
+                        icon={MdViewSidebar} */}
+                                        {/* /* @ts-ignore  */}
+                                        {/* onClick={() => handleViewStudent(row.cells[0].row.original.uuid)}
+                    >
+                        View Student
+                    </ButtonWithIcon>
+                </td> */}
+                                    </TableRow>
+                                );
+                            })}
+                        </TableBody>
+                    </Table>
+                    <TablePagination
+                        canNextPage={canNextPage}
+                        canPreviousPage={canPreviousPage}
+                        gotoPage={gotoPage}
+                        nextPage={nextPage}
+                        pageCount={pageCount}
+                        pageIndex={pageIndex}
+                        pageOptions={pageOptions}
+                        pageSize={pageSize}
+                        previousPage={previousPage}
+                        setPageSize={setPageSize}
+                    />
+                </>
+            ) : (
+                <div className="flex items-center justify-center min-h-[30vh]">
+                    <h2 className="m-4 text-center text-xl">Nothing to show, no payments have been recorded</h2>
+                </div>
+            )}
         </div>
     );
 }
