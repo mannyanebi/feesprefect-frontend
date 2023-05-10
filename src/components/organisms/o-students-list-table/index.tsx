@@ -21,9 +21,7 @@ function StudentsListTable({ tablePageSizeValue, filterClassId }: IStudentsListT
     const fetchAndSetStudentsData = useCallback(async () => {
         try {
             setLoading(true);
-            const queryString: string = `students/?all&academic_class_id=${
-                filterClassId ?? filterBy
-            }&name__contains=${searchQuery}`;
+            const queryString: string = `students/?all&academic_class_id=${filterClassId ?? filterBy}`;
             const response = await api.get(queryString);
             if (response.status === 200) {
                 setStudentsListData(response.data);
