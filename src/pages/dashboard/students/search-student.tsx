@@ -25,13 +25,13 @@ function SearchStudent() {
     const onSubmit: SubmitHandler<AllFormFieldTypes> = async (data) => {
         try {
             setLoading(true);
-            // const searchQuery = data['Search Name'];
-            // const queryString: string = `students/?all&name__contains=${searchQuery}`;
-            // const response = await api.get(queryString);
-            // if (response.status === 200) {
-            //     setStudentsListData(response.data);
-            // }
-            // setLoading(false);
+            const searchQuery = data['Search Name'];
+            const queryString: string = `students/?all&name__contains=${searchQuery}`;
+            const response = await api.get(queryString);
+            if (response.status === 200) {
+                setStudentsListData(response.data);
+            }
+            setLoading(false);
         } catch (error) {
             setLoading(false);
             let errorMessage;
