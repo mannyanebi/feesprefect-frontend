@@ -43,9 +43,9 @@ function StudentPaymentHistory({
         fetchAndSetStudentPaymentHistoryData();
     }, [fetchAndSetStudentPaymentHistoryData, refreshStudentPaymentHistory]);
     return (
-        <div className="w-3/5 flex flex-col space-y-5 border-l justify-center px-6 overflow-y-auto">
+        <div className="w-1/2 xl:w-2/5 flex flex-col space-y-5 border-l justify-center px-6 overflow-y-auto">
             <div className="w-full flex flex-row space-x-4 items-center justify-between">
-                <h5 className="text-lg font-medium text-neutral-800">Payments</h5>
+                <h5 className="text-md xl:text-lg font-medium text-neutral-800">Payments</h5>
                 <h5 className="text-sm text-gray-500">Transaction History</h5>
             </div>
             {studentPaymentHistoryData.length > 0 ? (
