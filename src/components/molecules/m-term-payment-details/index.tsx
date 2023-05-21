@@ -23,11 +23,11 @@ function TermPaymentDetails({ paymentHistory }: ITermPaymentDetailsProps) {
         return (
             <div className="flex flex-col space-y-3">
                 <div className="w-full bg-gray-100 p-3">
-                    <h2 className="text-primary font-medium text-xl">{academicClassName}</h2>
+                    <h2 className="text-primary font-medium text-md xl:text-xl">{academicClassName}</h2>
                 </div>
                 {payments &&
                     payments.map((paymentDetail) => (
-                        <div className="px-6 space-y-2">
+                        <div className="px-3 xl:px-6 space-y-2">
                             <div className="flex flex-row justify-between">
                                 <h5 className="font-medium text-primary text-md">{paymentDetail?.schoolFeeName}</h5>
                                 <span className="inline-flex flex-row space-x-4 items-center">

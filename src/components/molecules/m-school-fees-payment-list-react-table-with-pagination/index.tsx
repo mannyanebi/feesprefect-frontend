@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Table from 'components/atoms/a-table';
 import TableBody from 'components/atoms/a-table-body';
 import TableHead from 'components/atoms/a-table-head';
 import TableRow from 'components/atoms/a-table-row';
-// import { MdViewSidebar } from 'react-icons/md';
+import { AiFillEdit } from 'react-icons/ai';
 import { useTable, usePagination, Row, Column } from 'react-table';
 import TablePagination from 'components/atoms/a-table-pagination';
 import GreenCheckMark from 'components/atoms/a-green-check-mark';
 import RedCrossMark from 'components/atoms/a-red-cross-mark';
+import ButtonWithIcon from 'components/atoms/a-button-with-icon';
+import { useNavigate } from 'react-router-dom';
 // import ButtonWithIcon from 'components/atoms/a-button-with-icon';
 // import { useNavigate } from 'react-router-dom';
 
@@ -53,11 +55,11 @@ function SchoolFeesPaymentTableWithPagination({ columns, data, pageSizeValue = 1
         usePagination,
     );
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
-    // const handleViewStudent = useCallback((uuid: string) => {
-    //     navigate(`/dashboard/students/view/${uuid}`);
-    // }, []);
+    const handleEditPayment = useCallback((uuid: string, schoolFeeId: string) => {
+        navigate(`update/${uuid}/${schoolFeeId}`);
+    }, []);
 
     return (
         <div className="overflow-x-auto flex flex-col space-y-4">
@@ -102,16 +104,21 @@ function SchoolFeesPaymentTableWithPagination({ columns, data, pageSizeValue = 1
                                                 </td>
                                             );
                                         })}
-                                        {/* <td className="whitespace-nowrap px-4 py-2 text-gray-700"> */}
-                                        {/* @ts-ignore */}
-                                        {/* <ButtonWithIcon
-                        icon={MdViewSidebar} */}
-                                        {/* /* @ts-ignore  */}
-                                        {/* onClick={() => handleViewStudent(row.cells[0].row.original.uuid)}
-                    >
-                        View Student
-                    </ButtonWithIcon>
-                </td> */}
+                                        <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                                            <ButtonWithIcon
+                                                icon={AiFillEdit}
+                                                onClick={() =>
+                                                    handleEditPayment(
+                                                        // @ts-ignore
+                                                        row.cells[0].row.original.uuid,
+                                                        // @ts-ignore
+                                                        row.cells[0].row.original.schoolFee.id,
+                                                    )
+                                                }
+                                            >
+                                                Edit Payment
+                                            </ButtonWithIcon>
+                                        </td>
                                     </TableRow>
                                 );
                             })}

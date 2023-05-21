@@ -97,9 +97,9 @@ function StudentDetailsCard({ studentUUID, studentData, refetchStudentData }: IS
                 />
             </FormModal>
             {/* <div className="flex flex-col space-y-8"> */}
-            <div className="flex h-[80vh] w-11/12 mx-auto">
+            <div className="flex min-h-[80vh] w-11/12 mx-auto">
                 <div className="h-full flex flex-col rounded-lg bg-white shadow-lg w-full dark:bg-neutral-700 md:flex-row py-12 px-8">
-                    <div className="w-2/5">
+                    <div className="w-1/2 xl:w-3/5">
                         <ButtonWithIcon
                             icon={AiFillEdit}
                             /* @ts-ignore */
@@ -111,7 +111,7 @@ function StudentDetailsCard({ studentUUID, studentData, refetchStudentData }: IS
                             <div className="w-32 h-32 rounded-full">
                                 <img className="rounded-full w-full h-full object-cover" src={StudentAvatar} alt="" />
                             </div>
-                            <div className="px-16 py-6 flex flex-col w-full">
+                            <div className="px-8 xl:px-16 py-6 flex flex-col w-full">
                                 <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
                                     <div className="inline-block min-w-full py-2">
                                         <div className="overflow-hidden">

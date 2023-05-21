@@ -4,6 +4,7 @@ import DashboardPage from 'pages/dashboard';
 import AcademicClassesPage from 'pages/dashboard/classes';
 import AddNewClass from 'pages/dashboard/classes/add-new-class';
 import PaymentsPage from 'pages/dashboard/payments';
+import EditStudentPayment from 'pages/dashboard/payments/update';
 import StudentsPage from 'pages/dashboard/students';
 import AddNewStudent from 'pages/dashboard/students/add-new-student';
 import SearchStudent from 'pages/dashboard/students/search-student';
@@ -27,6 +28,7 @@ function App() {
                     <Route path="students/search" element={<SearchStudent />} />
                     <Route path="students/view/:studentUUID" element={<ViewStudent />} />
                     <Route path="payments" element={<PaymentsPage />} />
+                    <Route path="payments/update/:paymentUUID/:schoolFeeId" element={<EditStudentPayment />} />
                 </Route>
             </Routes>
         </BrowserRouter>

@@ -15,7 +15,6 @@ function SchoolFeesPaymentsListTable({ tablePageSizeValue, filterClassId }: ISch
     const [schoolFeesPaymentsListData, setSchoolFeesPaymentsListData] = useState<Array<any>>([]);
     const [loading, setLoading] = useState<boolean>(false);
     // const [filterBy, setFilterBy] = useState<string>('');
-
     const fetchAndSetSchoolFeesPaymentsData = useCallback(async () => {
         try {
             setLoading(true);
