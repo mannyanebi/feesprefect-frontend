@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import api from 'api';
+import ClassListDropdown from 'components/atoms/a-class-list-select';
 import SectionLoader from 'components/atoms/a-section-spinner';
 import Toast from 'components/atoms/a-toast';
 import SchoolFeesPaymentTableWithPagination from 'components/molecules/m-school-fees-payment-list-react-table-with-pagination';
@@ -14,11 +15,13 @@ interface ISchoolFeesPaymentsListTableProps {
 function SchoolFeesPaymentsListTable({ tablePageSizeValue, filterClassId }: ISchoolFeesPaymentsListTableProps) {
     const [schoolFeesPaymentsListData, setSchoolFeesPaymentsListData] = useState<Array<any>>([]);
     const [loading, setLoading] = useState<boolean>(false);
-    // const [filterBy, setFilterBy] = useState<string>('');
+    const [filterBy, setFilterBy] = useState<string>('');
     const fetchAndSetSchoolFeesPaymentsData = useCallback(async () => {
         try {
             setLoading(true);
-            const queryString: string = 'school-fees-payment/?all';
+            const queryString: string = `school-fees-payment/?all&school_fee__academic_class_id=${
+                filterClassId ?? filterBy
+            }`;
             const response = await api.get(queryString);
             if (response.status === 200) {
                 setSchoolFeesPaymentsListData(response.data);
@@ -36,7 +39,7 @@ function SchoolFeesPaymentsListTable({ tablePageSizeValue, filterClassId }: ISch
             }
             Toast(errorMessage, { type: 'error' });
         }
-    }, []);
+    }, [filterBy]);
 
     useEffect(() => {
         fetchAndSetSchoolFeesPaymentsData();
@@ -57,10 +60,10 @@ function SchoolFeesPaymentsListTable({ tablePageSizeValue, filterClassId }: ISch
                         <h4 className="mx-2 font-bold text-lg">Search students by name:</h4>
                         <DebouncedSearchInput setSearchQuery={setSearchQuery} />
                     </div> */}
-                    {/* <div className="flex space-x-2 items-center justify-center">
+                    <div className="flex space-x-2 items-center justify-center">
                         <h4 className="mx-2 font-bold text-lg">Filter by classes:</h4>
                         <ClassListDropdown filterBy={filterBy} setFilterBy={setFilterBy} />
-                    </div> */}
+                    </div>
                 </div>
             </div>
             <SchoolFeesPaymentTableWithPagination
