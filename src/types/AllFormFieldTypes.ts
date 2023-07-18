@@ -19,6 +19,7 @@ export interface AddNewClassFormFieldTypes {
 export interface AddPaymentFormFieldTypes {
     'School Fee': string;
     'Amount Paid': number;
+    'Is Registration Fee Payment': boolean;
 }
 
 export interface PromoteClassStudentsFormTypes {

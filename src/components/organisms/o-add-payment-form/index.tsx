@@ -2,6 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import api from 'api';
 import SpinnerIcon from 'components/atoms/a-spinner';
 import Toast from 'components/atoms/a-toast';
+import CheckboxInputField from 'components/atoms/form-fields/a-checkbox-input-field';
 import SchoolFeesSelectInput from 'components/atoms/form-fields/a-school-fees-select-field';
 import TextInputField from 'components/atoms/form-fields/a-text-input-field';
 import React, { Dispatch, SetStateAction } from 'react';
@@ -38,6 +39,7 @@ function AddPaymentForm({
                 schoolFee: {
                     id: JSON.parse(data['School Fee']),
                 },
+                isRegistrationFeePayment: data['Is Registration Fee Payment'],
             });
 
             if (response.status === 201) {
@@ -67,6 +69,12 @@ function AddPaymentForm({
                 error={errors['School Fee']}
             />
             <TextInputField label={'Amount Paid'} type="number" register={register} error={errors['Amount Paid']} />
+            <CheckboxInputField
+                label="Is Registration Fee Payment"
+                register={register}
+                checkboxInfoText="Is this a registration fee payment?"
+                error={errors['Is Registration Fee Payment']}
+            />
             <button
                 type="submit"
                 disabled={isSubmitting}

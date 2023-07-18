@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import ButtonWithIcon from 'components/atoms/a-button-with-icon';
 import { AiFillEdit } from 'react-icons/ai';
 import UpdateStudentForm from 'pages/dashboard/students/updated-student-form';
+import { useNavigate } from 'react-router-dom';
 import FormModal from '../o-form-modal';
 import AddPaymentForm from '../o-add-payment-form';
 import StudentPaymentHistory from '../o-payment-history';
@@ -23,7 +24,7 @@ function StudentDetailsCard({ studentUUID, studentData, refetchStudentData }: IS
     const [isOpenAddStudentPaymentModalForm, setIsOpenAddStudentPaymentModalForm] = useState<boolean>(false);
     const [refreshStudentPaymentHistory, setRefreshStudentPaymentHistory] = useState<boolean>(false);
     const [studentActiveField, setStudentActiveField] = useState<boolean>(studentData?.active);
-
+    const navigate = useNavigate();
     const [isOpenUpdateStudentModalForm, setIsOpenUpdateStudentModalForm] = useState<boolean>(false);
 
     const addStudentPaymentOnclickHandler = () => {
@@ -53,6 +54,25 @@ function StudentDetailsCard({ studentUUID, studentData, refetchStudentData }: IS
         }
     }, []);
 
+    const deleteStudent = useCallback(async () => {
+        try {
+            const response = await api.delete(`students/${studentUUID}`);
+            if (response.status === 204) {
+                navigate(-1);
+            }
+        } catch (error) {
+            let errorMessage;
+            // @ts-ignore
+            if (error.response) {
+                // @ts-ignore
+                errorMessage = error.response.data.message;
+            } else {
+                errorMessage = 'Something went wrong';
+            }
+            Toast(errorMessage, { type: 'error' });
+        }
+    }, []);
+
     const updateStudentActiveFieldOnclickHandler = () => {
         Swal.fire({
             title: `Are you sure you want to ${studentActiveField === true ? 'deactivate' : 'reactivate'} student?`,
@@ -66,6 +86,23 @@ function StudentDetailsCard({ studentUUID, studentData, refetchStudentData }: IS
         }).then((result) => {
             if (result.isConfirmed) {
                 updateStudentActiveField();
+            }
+        });
+    };
+
+    const deleteStudentOnclickHandler = () => {
+        Swal.fire({
+            title: 'Are you sure you want to delete this student?',
+            // eslint-disable-next-line quotes
+            // text: 'Cheers',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#015cb1',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteStudent();
             }
         });
     };
@@ -195,6 +232,13 @@ function StudentDetailsCard({ studentUUID, studentData, refetchStudentData }: IS
                                             ) : (
                                                 <span>Activate Student</span>
                                             )}
+                                        </button>
+                                        <button
+                                            type="button"
+                                            onClick={deleteStudentOnclickHandler}
+                                            className="rounded-md border border-secondary bg-secondary px-7 py-2 font-medium text-white hover:bg-white hover:text-black focus:outline-none focus:ring active:text-primary"
+                                        >
+                                            Delete Student
                                         </button>
                                     </div>
                                 </div>
